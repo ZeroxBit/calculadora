@@ -34,6 +34,7 @@ func main() {
 		fmt.Println(id)
 	})
 
+	// funcion que se ejecuta al llamar al metodo get/id/{id}
 	app.Macros().Int.RegisterFunc("isPair", func() func(string) bool {
 		return func(paramValue string) bool {
 			eval, _ := strconv.Atoi(paramValue)
@@ -41,6 +42,12 @@ func main() {
 		}
 	})
 
+	// funcion que evalua si la ruta llamda no existe y si no es asi, se manda un mensaje especificado
+	app.OnErrorCode(iris.StatusNotFound, func(ctx iris.Context) {
+		ctx.HTML("<h1>Ruta no encontrada. 404</h1>")
+	})
+
+	// isPair() llama a la funcion una ves es llamado este end-point
 	app.Get("/id/{id:int isPair()}", func(ctx iris.Context) {
 		id, _ := ctx.Params().GetInt("id")
 		fmt.Println(id)
