@@ -7,6 +7,7 @@ import (
 func main() {
 	getArray()
 	getSlice()
+	showIndexValue()
 }
 
 func getSlice() {
@@ -23,4 +24,12 @@ func getArray() {
 	nombres[1] = "maria"
 
 	fmt.Println(nombres, numeros)
+}
+
+func showIndexValue() {
+	x := []int{1, 2, 3, 4, 5, 6, 7}
+
+	for i, v := range x {
+		fmt.Println("index: ", i, " ", "value: ", v)
+	}
 }
