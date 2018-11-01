@@ -17,16 +17,17 @@ type Producto struct { // para que la estructura funcione bien, se necesita gorm
 func main() {
 	// coneccion a la base de datos -> ("base de datos","user_db:password_db@/nombre_db? lo que sigue todo igual")
 	db, err := gorm.Open("mysql",
-		"root:123456@/coinbank?charset=utf8mb4&parseTime=True&loc=Local")
+		"root:@/prueba?charset=utf8mb4&parseTime=True&loc=Local")
 	if err != nil {
-		panic("Error en coneccion de la base de datos")
+		fmt.Println(err)
+		return
 	}
 	defer db.Close()
 	fmt.Println("Coneccion con exito!")
 
 	// para crear la base de datos con la structura Productos
-	db.CreateTable(&Producto{}) // gorm usa los nombres de las tablas en plural
-	fmt.Println("Se creo la tabla Productos en la bd")
+	// db.CreateTable(&Producto{}) // gorm usa los nombres de las tablas en plural
+	// fmt.Println("Se creo la tabla Productos en la bd")
 
 	// para agregar reguistros en una tabla
 	// db.Create(&Producto{CodigoBarras: "01010125454", Precio: 1200})
